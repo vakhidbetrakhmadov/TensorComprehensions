@@ -3,15 +3,8 @@ set -ex
 
 export TC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if ! test ${CLANG_PREFIX}; then
-    echo 'Environment variable CLANG_PREFIX is required, please run export CLANG_PREFIX=$(llvm-config --prefix)'
-    exit 1
-fi
-
-if ! test ${CONDA_PREFIX}; then
-    echo 'TC now requires conda to build, see BUILD.md'
-    exit 1
-fi
+CONDA_PREFIX=/opt/conda/anaconda/envs/tc_build
+CLANG_PREFIX=/opt/conda/anaconda/envs/tc_build/bin/llvm-config
 
 PYTHON=${PYTHON:="`which python3`"}
 CC=${CC:="`which gcc`"}
@@ -22,11 +15,11 @@ WITH_CAFFE2=${WITH_CAFFE2:=OFF}
 WITH_TAPIR=${WITH_TAPIR:=ON}
 WITH_BINDINGS=${WITH_BINDINGS:=OFF}
 
-CUDNN_ROOT_DIR=${CUDNN_ROOT_DIR:=${CONDA_PREFIX}}
-CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH:=${CONDA_PREFIX}/lib/cmake}
-HALIDE_PREFIX=${HALIDE_PREFIX:=${CONDA_PREFIX}}
-EIGEN_PREFIX=${EIGEN_PREFIX:=${CONDA_PREFIX}}
-CAFFE2_PREFIX=${CAFFE2_PREFIX:=${CONDA_PREFIX}}
+CUDNN_ROOT_DIR=${CUDNN_ROOT_DIR:=CONDA_PREFIX}
+CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH:=CONDA_PREFIX/lib/cmake}
+HALIDE_PREFIX=${HALIDE_PREFIX:=CONDA_PREFIX}
+EIGEN_PREFIX=${EIGEN_PREFIX:=CONDA_PREFIX}
+CAFFE2_PREFIX=${CAFFE2_PREFIX:=CONDA_PREFIX}
 
 THIRD_PARTY_INSTALL_PREFIX=${TC_DIR}/third-party-install
 
@@ -56,7 +49,7 @@ cmake -DWITH_CAFFE2=${WITH_CAFFE2} \
        -DCAFFE2_PREFIX=${CAFFE2_PREFIX} \
        -DTHIRD_PARTY_INSTALL_PREFIX=${THIRD_PARTY_INSTALL_PREFIX} \
        -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
-       -DCLANG_PREFIX=${CLANG_PREFIX} \
+       -DCLANG_PREFIX=CLANG_PREFIX \
        -DCUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
        -DCUDNN_ROOT_DIR=${CUDNN_ROOT_DIR} \
        -DWITH_CUDA=${WITH_CUDA} \
