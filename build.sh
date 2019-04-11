@@ -3,6 +3,7 @@ set -ex
 
 export TC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
 CONDA_PREFIX=/opt/conda/anaconda/envs/tc_build
 CLANG_PREFIX=/opt/conda/anaconda/envs/tc_build/bin/llvm-config
 
@@ -50,7 +51,7 @@ cmake -DWITH_CAFFE2=${WITH_CAFFE2} \
        -DTHIRD_PARTY_INSTALL_PREFIX=${THIRD_PARTY_INSTALL_PREFIX} \
        -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
        -DCLANG_PREFIX=CLANG_PREFIX \
-       -DCUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
+       -DCUDA_TOOLKIT_ROOT_DIR=CUDA_TOOLKIT_ROOT_DIR \
        -DCUDNN_ROOT_DIR=${CUDNN_ROOT_DIR} \
        -DWITH_CUDA=${WITH_CUDA} \
        -DTC_DIR=${TC_DIR} \
