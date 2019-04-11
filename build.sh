@@ -6,7 +6,7 @@ export TC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONDA_PREFIX=/opt/conda/anaconda/envs/tc_build
 CLANG_PREFIX=/opt/conda/anaconda/envs/tc_build/bin/llvm-config
 
-PYTHON=${PYTHON:="`which python3`"}
+PYTHON=${PYTHON:="`which /opt/conda/anaconda/envs/tc_build/bin/python3`"}
 CC=${CC:="`which gcc`"}
 CXX=${CXX:="`which g++`"}
 
