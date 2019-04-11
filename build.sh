@@ -5,7 +5,7 @@ export TC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 CUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR:="/usr/local/cuda"}
 CONDA_PREFIX=${CONDA_PREFIX:="/opt/conda/anaconda/envs/tc_build"}
-CLANG_PREFIX=${CLANG_PREFIX:="/opt/conda/anaconda/envs/tc_build/bin/llvm-config"}
+CLANG_PREFIX=${CLANG_PREFIX:="${CONDA_PREFIX}/bin/llvm-config"}
 
 PYTHON=${PYTHON:="`which /opt/conda/anaconda/envs/tc_build/bin/python3`"}
 CC=${CC:="`which gcc`"}
